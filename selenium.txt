@@ -1,0 +1,104 @@
+package sports;
+
+
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.concurrent.TimeUnit;
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class SportsChromeTest {
+    protected static WebDriver driver = null;
+    protected final String baseUrl = "https://www.betalist.com/";
+
+
+    @Test
+    @Order(1)
+    //@Disabled
+    public void openBrowser() {
+        System.setProperty("webdriver.chrome.driver", "D:/Chrome/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get(baseUrl);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+    }
+
+
+
+    @Test
+    @Order(2)
+    //@Disabled
+    public void register() {
+        /*
+        driver.get(baseUrl + "/registration/");
+        Assertions.assertTrue(driver.getTitle().toUpperCase().contains
+                ("Регистрация".toUpperCase()));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+         */
+        driver.get(baseUrl + "/users/auth/twitter/");
+        Assertions.assertTrue(driver.getTitle().toUpperCase().contains
+                ("Sign In".toUpperCase()));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        //WebElement button = driver.findElement(By.xpath("//*[@id='app-root']"));
+        //button.click();
+    }
+/*
+    @Test
+    @Order(4)
+    //@Disabled
+    public void SingUp() {
+        ////*[@id="branding-layout"] логин
+        ////*[@id="branding-layout"] password
+        ////*[@id="branding-layout"]
+
+        // //*[@id="username"] email
+        // //*[@id="password"]
+
+        WebElement nic = driver.findElement(By.id("nik_user"));
+        nic.sendKeys("Bitebs");
+        WebElement email = driver.findElement(By.id("email_user"));
+        email.sendKeys("Vitebs123@gmail.com");
+        WebElement checkbox = driver.findElement(By.id("userinfo"));
+        checkbox.click();
+        //Select city = new Select(driver.findElement(By.id("city")));
+        //city.selectByVisibleText("Витебск");
+        Select country = new Select(driver.findElement(By.id("country")));
+        country.selectByVisibleText("Беларусь");
+        WebElement button = driver.findElement(By.xpath("//*[@id='submit_check']"));
+        button.click();
+    }
+
+ */
+@Test
+@Order(3)
+//@Disabled
+public void SingUp() {
+    ////*[@id="branding-layout"] логин
+    ////*[@id="branding-layout"] password
+    ////*[@id="branding-layout"]
+
+    // //*[@id="username"] email
+    // //*[@id="password"]
+
+    WebElement email = driver.findElement(By.id("username_or_email"));
+    email.sendKeys("Vitebs123@gmail.com");
+    WebElement password = driver.findElement(By.id("password"));
+    password.sendKeys("4b708ObH");
+    //WebElement checkbox = driver.findElement(By.id("userinfo"));
+    //checkbox.click();
+    //Select city = new Select(driver.findElement(By.id("city")));
+    //city.selectByVisibleText("Витебск");
+    //Select country = new Select(driver.findElement(By.id("country")));
+    //country.selectByVisibleText("Беларусь");
+    WebElement button = driver.findElement(By.xpath("//*[@id='allow']"));
+    button.click();
+}
+
+
+}
